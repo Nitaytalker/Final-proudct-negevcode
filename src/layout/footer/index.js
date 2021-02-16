@@ -4,7 +4,7 @@ import { ImFacebook2 } from "react-icons/im";
 function Footer() {
     return (
         <div className='footer'>
-            <Card>
+            <Card style={{backgroundColor:'#262626',color:'white'}}>
                 <Card.Body>
                     <Card.Title>Copyright</Card.Title>
                     <Card.Text>

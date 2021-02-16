@@ -1,6 +1,7 @@
 import { MDBBtn, MDBRow, MDBContainer, MDBCol,MDBCardGroup } from "mdbreact";
 import   "./homepage.css";
 import Smallproudct from "../smallproudct";
+import { Container,Row,Col,Button,Image } from "react-bootstrap";
 
 const myproudcts = [
     {
@@ -54,24 +55,59 @@ function HomePage(props) {
     const top3proudct =(
         <MDBCardGroup className="d-flex justify-content-center">
             <MDBRow>
-            <Smallproudct proudcts={myproudcts}/>
+            <Smallproudct product={myproudcts}/>
             </MDBRow>
         </MDBCardGroup>
     )
-
-    return (
+    return(
         <div>
-            {myimagebutton}
-            <MDBContainer className='homepage'>
-             
+             {myimagebutton}
              <br/>
-             <h2>popular item</h2>
-            {top3proudct}
-            <br/>
-        </MDBContainer>
+             <Container className='homepage'>
+             <Row>
+                 
+                 <Col  className="t-shirt backImg" >
+                     <h2>T-shirt</h2>
+                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <Button variant="outline-danger" >Go See</Button>
+                 </Col>
+                 {/* <Col xs={1}></Col> */}
+                 <Col  className="jacket backImg">
+                 <h2>jacket</h2>
+                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <Button variant="outline-danger" >Go See</Button>
+                 </Col>
+             </Row>
+             <Row>
+                 <Col className="pants backImg">
+                 <h2>pants</h2>
+                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <Button variant="outline-danger" >Go See</Button>
+                 </Col>
+                 {/* <Col xs={1}></Col> */}
+                 <Col className="shoes backImg">
+                 <h2>shoes</h2>
+                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <Button variant="outline-danger" >Go See</Button>
+                 </Col>
+             </Row>
+            </Container>
         </div>
-        
     )
+
+    // return (
+    //     <div>
+    //         {myimagebutton}
+    //         <MDBContainer className='homepage'>
+             
+    //          <br/>
+    //          <h2>popular item</h2>
+    //         {top3proudct}
+    //         <br/>
+    //     </MDBContainer>
+    //     </div>
+        
+    // )
 }
 
 
