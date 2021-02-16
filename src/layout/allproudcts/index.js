@@ -151,7 +151,7 @@ function AllProudcts(props) {
     function rowOfProdcts(array1) {
         return (
             <MDBRow>
-                <MDBCol md={1}  ></MDBCol>
+                <MDBCol md={1} ></MDBCol>
                 <MDBCol>
                     <MDBCardGroup>
                         {/* {items} */}
