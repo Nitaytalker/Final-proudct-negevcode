@@ -4,6 +4,7 @@ import SingelProudct from "../singelproudct";
 import AllProudcts from "../allproudcts";
 import About from "../about"
 import HomePage from "../homepage"
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 const myproudcts = [
     {
@@ -14,7 +15,7 @@ const myproudcts = [
         "name": 'proudct_name',
         "price": "100",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
@@ -23,7 +24,7 @@ const myproudcts = [
         "name": 'proudct_name2',
         "price": "150",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
@@ -32,7 +33,7 @@ const myproudcts = [
         "name": 'proudct_name2',
         "price": "150",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
@@ -41,7 +42,7 @@ const myproudcts = [
         "name": 'proudct_name2',
         "price": "150",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
@@ -50,7 +51,7 @@ const myproudcts = [
         "name": 'proudct_name2',
         "price": "150",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
@@ -59,7 +60,7 @@ const myproudcts = [
         "name": 'proudct_name2',
         "price": "150",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
     },
     {
         "img": ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMo8SnQkV9kMO7BLEAIJLcr_mv7-b-3GxPIOW31Y-_uwjssvoDxp6R77Q7IaIR5sDo3GrAGXAl&usqp=CAc',
@@ -68,33 +69,28 @@ const myproudcts = [
         "name": 'proudct_name3',
         "price": "120",
         "star": "2.5",
-        "text":"lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+        "text": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
     }
 ];
 
 const aboutText = {
-    title:"Online shop about page",
-    smalltitle:"Photography",
-    image:"https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg",
-    text:"Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam."
+    title: "Online shop about page",
+    smalltitle: "Photography",
+    image: "https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg",
+    text: "Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam."
 
 }
-const shopname ='Online Shop'
+const shopname = 'Online Shop'
 
-const filters=[
-    't-shirt','pants','Shoes','Hats'
+const filters = [
+    't-shirt', 'pants', 'Shoes', 'Hats'
 ]
 
 function Main() {
     return (
         <div className='Main'>
-            <Header />
-            {/* <SingelProudct  proudcts={myproudcts[0]} />  */}
-            {/* <AllProudcts proudcts={myproudcts} filters={filters} /> */}
-            {/* <About aboutText={aboutText}/> */}
-            <HomePage shopname={shopname}/>
-            <br /><br /><br />
-            <Footer />
+    
+
         </div>
     )
 }
