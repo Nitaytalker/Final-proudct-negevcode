@@ -60,13 +60,13 @@ function HomePage(props) {
         </MDBCardGroup>
     )
     return(
-        <div>
+        <div >
              {myimagebutton}
              <br/>
              <Container className='homepage'>
              <Row>
                  
-                 <Col  className="t-shirt backImg" >
+                 <Col className="t-shirt backImg" >
                      <h2>T-shirt</h2>
                      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     <Button variant="outline-danger" >Go See</Button>

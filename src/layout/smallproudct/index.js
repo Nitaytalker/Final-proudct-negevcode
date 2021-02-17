@@ -1,11 +1,11 @@
 import { MDBCard, MDBCardTitle, MDBBtn, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody, MDBIcon, MDBContainer, MDBRow, MDBCol } from "mdbreact";
-
+import Star from "../star/star"
 
 
 function Smallproudct(props) {
-
+    // console.log(props.product);
         return (
-            <MDBCol md={4} style={{ maxWidth: "14rem" }} >
+            <MDBCol  style={{ maxWidth: "14rem" }} >
             <MDBCard className="p-2 w-100 ">
                 <MDBCardImage src={props.product.img[0]} alt="MDBCard image cap" top hover
                     overlay="dark-slight"  />
@@ -19,7 +19,7 @@ function Smallproudct(props) {
                     <MDBCardText style={{margin:'0px'}}>
                         price: {props.product.price}$
                     </MDBCardText>
-                    <MDBCardText style={{margin:'0px'}}> stars? </MDBCardText>
+                    <MDBCardText style={{margin:'0px'}}> <Star numberOfStar={props.product.star}/> </MDBCardText>
                     <MDBBtn   color="danger" size="md">Go</MDBBtn>
                 </MDBCardBody>
             </MDBCard>
