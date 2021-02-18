@@ -2,6 +2,7 @@ import { MDBBtn, MDBRow, MDBContainer, MDBCol,MDBCardGroup } from "mdbreact";
 import   "./homepage.css";
 import Smallproudct from "../smallproudct";
 import { Container,Row,Col,Button,Image } from "react-bootstrap";
+import ButtonBases from "./buttonimg"
 
 const myproudcts = [
     {
@@ -52,46 +53,12 @@ function HomePage(props) {
             </MDBRow>
         </MDBContainer>
     )
-    const top3proudct =(
-        <MDBCardGroup className="d-flex justify-content-center">
-            <MDBRow>
-            <Smallproudct product={myproudcts}/>
-            </MDBRow>
-        </MDBCardGroup>
-    )
     return(
         <div >
              {myimagebutton}
-             <br/>
-             <Container className='homepage'>
-             <Row>
-                 
-                 <Col className="t-shirt backImg" >
-                     <h2>T-shirt</h2>
-                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    <Button variant="outline-danger" >Go See</Button>
-                 </Col>
-                 {/* <Col xs={1}></Col> */}
-                 <Col  className="jacket backImg">
-                 <h2>jacket</h2>
-                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    <Button variant="outline-danger" >Go See</Button>
-                 </Col>
-             </Row>
-             <Row>
-                 <Col className="pants backImg">
-                 <h2>pants</h2>
-                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    <Button variant="outline-danger" >Go See</Button>
-                 </Col>
-                 {/* <Col xs={1}></Col> */}
-                 <Col className="shoes backImg">
-                 <h2>shoes</h2>
-                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    <Button variant="outline-danger" >Go See</Button>
-                 </Col>
-             </Row>
-            </Container>
+            
+             
+            <ButtonBases/>
         </div>
     )
 
