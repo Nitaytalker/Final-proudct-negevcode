@@ -12,3 +12,7 @@ h4.bookTitle {
 h3{
     color: blue;
 }
+
+.MuiPagination-ul{
+    justify-content: center;
+}

@@ -11,22 +11,23 @@ import Login from './layout/login';
 import ShoppingCart from './layout/shoppingcart';
 import About from './layout/about';
 import SingelProudct from './layout/singelproudct';
+import Blog from './layout/blog'
 
 function App() {
   return (
-    <div  className="App">
+    <div  className="App" >
       <Header />
-
+      
       <BrowserRouter>
         <Switch>
-
           <Route exact path='/' component={HomePage} />
           <Route exact path='/home' component={HomePage} />
           <Route exact path='/products' component={AllProudcts} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/shoppingcart' component={ShoppingCart}/>
           <Route exact path='/about' component={About}/>
-
+          <Route exact path='/blog' component={Blog}/>
+          <Route exact path='/singelproduct' component={SingelProudct}/>
         </Switch>
       </BrowserRouter>
 

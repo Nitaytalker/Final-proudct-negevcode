@@ -2,38 +2,44 @@ import { Col, Container, Button, Row, InputGroup, FormControl, Card, Dropdown, D
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from "mdbreact";
 import { GiShoppingCart } from "react-icons/gi";
+import Star from "../star/star"
+import React, { useState } from "react";
 
-function SingelProudct(props) {
-    function Mypic(props) {
-        function Star(props) {
-            function starttest(star) {
-                const stars = [];
-                let i = 0;
-                let number = star % 1
-                let maxStar = 5;
-                if (number) {
-                    star = star - number;
-                }
-                let word = 'star'
-                for (; i < star; i++) {
-                    stars.push(<a key={word + i.toString()}><BsStarFill /></a>);
-                }
-                if (number) {
-                    stars.push(<a key={word + i.toString()}><BsStarHalf /></a>);
-                    i++;
-                }
-                for (; i < maxStar; i++) {
-                    stars.push(<a key={word + i.toString()}><BsStar /></a>);
-                }
-                return stars;
-            }
-
-            const stars = starttest(props.star)
-            return <div key='star'>
-                {stars}
-            </div>
+export default function SingelProudct(props) {
+    const oneproduct ={
+        img: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJzmyeQY9B_fMKc-o-cMx3nHsr3nZC4CDQQcjRp0PagShGIgIrHBC3YWq04gXkdBdRXndTgZI&usqp=CAc',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMo8SnQkV9kMO7BLEAIJLcr_mv7-b-3GxPIOW31Y-_uwjssvoDxp6R77Q7IaIR5sDo3GrAGXAl&usqp=CAc',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxl4WyIOPoghPfEaqv5KJIB7EzzodtTLx1-CWb3zJq529FKecT80bqOYCPB4Y&usqp=CAc',
+            'https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg'],
+        name: 'proudct_name',
+        price: 100,
+        star: 2.9,
+        text: "lorem lorem lorem lorem lorem"
+    }
+    const gallery = (images) => {
+        const mygallery = images.map((pic, index) => {
+            let word = "pic";
+            return (
+                <Card key={ index + 1} border="danger" style={{ width: '30rem' }}>
+                    <MDBCarouselItem key={ index + 1} itemId={index + 1}>
+                        <MDBView>
+                            <img
+                                className="d-block w-100"
+                                src={pic}
+                                alt="First slide"
+                            />
+                            <MDBMask overlay="black-light" />
+                        </MDBView>
+                    </MDBCarouselItem>
+                </Card>
+            )
         }
-
+        )
+        console.log(mygallery);
+        return mygallery;
+    }
+    let [size,setSize]=useState("size")
+    function Mypic(props) {
         return (
             <div className="infoproudct">
                 <Container>
@@ -68,17 +74,14 @@ function SingelProudct(props) {
                                         key={"Danger"}
                                         id={`dropdown-split-variants-Danger`}
                                         variant={"danger"}
-                                        title={"Size"}
+                                        title={size}
                                     >
-                                        <Dropdown.Item eventKey="1">S</Dropdown.Item>
-                                        <Dropdown.Item eventKey="2">M</Dropdown.Item>
-                                        <Dropdown.Item eventKey="3" active>L</Dropdown.Item>
-                                        <Dropdown.Item eventKey="4">XL</Dropdown.Item>
-                                        <Dropdown.Item eventKey="5">XXL</Dropdown.Item>
-
+                                        <Dropdown.Item onClick={()=>setSize("S")} eventKey="1">S</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>setSize("M")} eventKey="2">M</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>setSize("L")} eventKey="3" >L</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>setSize("XL")} eventKey="4">XL</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>setSize("XXL")} eventKey="5">XXL</Dropdown.Item>
                                     </DropdownButton>
-
-
                                 </div>
                                 <br />
                                 <div>
@@ -101,7 +104,7 @@ function SingelProudct(props) {
                                 </div>
                                 <div> <Button variant="danger">Add to cart<GiShoppingCart style={{ fontSize: "25px" }} /></Button></div>
                                 <br />
-                                <div> Rating: <Star star={props.proudct.star} /> </div>
+                                <div>  <Star numberOfStar={props.proudct.star} /> </div>
                             </div>
                         </Col>
                     </Row>
@@ -110,41 +113,19 @@ function SingelProudct(props) {
 
         )
     }
-    const myname = props.proudcts.name
-
+    const myname = oneproduct.name
     return (
         <div className='singelproudct'>
             <h1>{myname}</h1>
             <br />
-            <Mypic proudct={props.proudcts} />
+            <Mypic proudct={oneproduct} />
             <br/><br /><br />
             <div> <Button variant="danger">Back to shop</Button></div>
         </div>
     );
 }
 
-const gallery = (images) => {
-    const mygallery = images.map((pic, index) => {
-        let word = "pic";
-        return (
-            <Card key={ index + 1} border="danger" style={{ width: '30rem' }}>
-                <MDBCarouselItem key={ index + 1} itemId={index + 1}>
-                    <MDBView>
-                        <img
-                            className="d-block w-100"
-                            src={pic}
-                            alt="First slide"
-                        />
-                        <MDBMask overlay="black-light" />
-                    </MDBView>
-                </MDBCarouselItem>
-            </Card>
-        )
-    }
-    )
-    console.log(mygallery);
-    return mygallery;
-}
 
 
-export default SingelProudct;
+
+ 

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const images = [
   {
-    url: 'https://i.ebayimg.com/thumbs/images/g/KhkAAOSwuCdbmAwO/s-l300.jpg',
+    url: 'https://images-na.ssl-images-amazon.com/images/I/712iPqGUc4L._AC_UX385_.jpg',
     title: 'T-shirt',
     width: '50%',
   },
@@ -15,7 +15,7 @@ const images = [
     width: '50%',
   },
   {
-    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jfDfewu06Os20POx2vPq9_3WVpiJ6xj_oA&usqp=CAU',
+    url: 'https://images-na.ssl-images-amazon.com/images/I/61zh7D5GkmL._UL1500_.jpg',
     title: 'jacket',
     width: '50%',
   },

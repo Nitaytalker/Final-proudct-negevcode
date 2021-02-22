@@ -1,8 +1,9 @@
-import { MDBBtn, MDBRow, MDBContainer, MDBCol,MDBCardGroup } from "mdbreact";
-import   "./homepage.css";
+import { MDBBtn, MDBRow, MDBContainer, MDBCol, MDBCardGroup } from "mdbreact";
+import "./homepage.css";
 import Smallproudct from "../smallproudct";
-import { Container,Row,Col,Button,Image } from "react-bootstrap";
+import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import ButtonBases from "./buttonimg"
+import React, { useState, useEffect } from 'react';
 
 const myproudcts = [
     {
@@ -15,7 +16,7 @@ const myproudcts = [
         "star": "2.5",
         "text": "lorem lorem lorem lorem lorem"
     },
-    
+
     {
         "img": ['https://d3ajt0yv1dh774.cloudfront.net/uploads/2020/09/men-LACOSTE-Sport-Hooded__SH1551423-300x300.jpg',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMo8SnQkV9kMO7BLEAIJLcr_mv7-b-3GxPIOW31Y-_uwjssvoDxp6R77Q7IaIR5sDo3GrAGXAl&usqp=CAc',
@@ -34,16 +35,16 @@ const myproudcts = [
         "star": "2.5",
         "text": "lorem lorem lorem lorem lorem"
     }
-   
+
 ];
 
 function HomePage(props) {
 
     const myimagebutton = (
-        <MDBContainer className="bg" style={{margin:''}}>  
-        <br/><br/>
-            <h1 style={{color:"#212121"}}>Online Shop</h1>
-            <br/><br/><br/><br/>
+        <MDBContainer className="bg" style={{ margin: '' }}>
+            <br /><br />
+            <h1 style={{ color: "#212121" }}>Online Shop</h1>
+            <br /><br /><br /><br />
             <MDBRow>
                 <MDBCol></MDBCol>
                 <MDBCol>
@@ -53,12 +54,13 @@ function HomePage(props) {
             </MDBRow>
         </MDBContainer>
     )
-    return(
+    // const [bestSellers,setListBestSellers]=useState(myproudcts)
+    
+    return (
         <div >
-             {myimagebutton}
-            
-             
-            <ButtonBases/>
+            {myimagebutton}
+            {/* {bestSellers} */}
+            <ButtonBases />
         </div>
     )
 
@@ -66,14 +68,14 @@ function HomePage(props) {
     //     <div>
     //         {myimagebutton}
     //         <MDBContainer className='homepage'>
-             
+
     //          <br/>
     //          <h2>popular item</h2>
     //         {top3proudct}
     //         <br/>
     //     </MDBContainer>
     //     </div>
-        
+
     // )
 }
 

@@ -1,7 +1,12 @@
 import { Navbar, NavDropdown, FormControl, Button, Form, Nav } from "react-bootstrap";
+import React from 'react';
 import { GiShoppingCart } from "react-icons/gi";
+// import TemporaryDrawer from "./headswipeable";
+
 
 function Header() {
+    
+    
     return (
         <div  className='header'>
             <Navbar fixed="top" bg="dark" variant="dark"  expand="lg">
@@ -11,16 +16,11 @@ function Header() {
                     <Nav className="mr-auto" >
                         <Nav.Link href="home" style={{color:'#d9534f'}} >Home</Nav.Link>
                         <Nav.Link href="products" style={{color:'#d9534f'}} >All products</Nav.Link>
-                        <NavDropdown  title="Dropdown" id="basic-nav-dropdown ">
-                            <NavDropdown.Item href="#action/3.1" >Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2" >Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3" >Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4" >Separated link</NavDropdown.Item>
-                        </NavDropdown>
                         <Nav.Link href="login" style={{color:'#d9534f'}}>login</Nav.Link>
                         <Nav.Link href="shoppingcart" style={{color:'#d9534f'}}>  Shopping cart <GiShoppingCart style={{fontSize:"25px"}} /></Nav.Link>
                         <Nav.Link href="about" style={{color:'#d9534f'}}>  about </Nav.Link>
+                        <Nav.Link href="blog" style={{color:'#d9534f'}}>  blog </Nav.Link>
+                        <Nav.Link href="singelproduct" style={{color:'#d9534f'}}>  singelproduct </Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -29,6 +29,7 @@ function Header() {
                 </Navbar.Collapse>
             </Navbar>
             <br/><br/><br/>
+            
         </div>
     )
 }

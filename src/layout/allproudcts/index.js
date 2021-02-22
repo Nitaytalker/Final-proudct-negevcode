@@ -1,12 +1,13 @@
-import { MDBCard, MDBCardTitle, MDBBtn, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody, MDBInput, MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBCardGroup, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Smallproudct from "../smallproudct";
 import CheckboxLabels from "../checkbox";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 // import PaginationControlled  from "../myPagination";
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles,Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
+import "./index.css";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -407,8 +408,8 @@ function AllProudcts(props) {
       function PaginationControlled({pages}) {
         return (
           <div className={classes.root} style={{margin: 'auto',width: '50%'}}>
-            <Typography>Page: {page}</Typography> 
-            <Pagination count={pages} page={page}  onChange={handleChange} variant="outlined" color="secondary" />
+            <Typography >Page: {page}</Typography> 
+            <Pagination count={pages} page={page}  onChange={handleChange} variant="outlined" color="secondary"  />
           </div>
         );
       }
@@ -474,7 +475,8 @@ function AllProudcts(props) {
             <h1>All products </h1>
             <MDBContainer>
                 <MDBRow>
-                    <MDBCol size='9'></MDBCol>
+                    <MDBCol size='1'></MDBCol>
+                    <MDBCol size='8'></MDBCol>
                     <MDBCol size='1'>
                         <DropdownButton as={ButtonGroup} title="Sort by" variant="outline-danger" id="bg-nested-dropdown">
                             <Dropdown.Item onClick={lowToHigh} eventKey="1">Low to high</Dropdown.Item>
@@ -490,7 +492,7 @@ function AllProudcts(props) {
                 <br/>
                 <MDBRow>
                     <MDBCol></MDBCol>
-                    <MDBCol size={10}><PaginationControlled pages={numberOfPages}/>  </MDBCol>
+                    <MDBCol size={10}><PaginationControlled  pages={numberOfPages}/>  </MDBCol>
                     <MDBCol></MDBCol>
                 </MDBRow>
                                  
