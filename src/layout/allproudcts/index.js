@@ -4,19 +4,19 @@ import CheckboxLabels from "../checkbox";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 // import PaginationControlled  from "../myPagination";
-import { makeStyles,Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import "./index.css";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
     },
-  }));
-  
+}));
+
 function AllProudcts(props) {
     const myproudcts = [
         {
@@ -401,25 +401,25 @@ function AllProudcts(props) {
         't-shirt', 'pants', 'Shoes', 'Hats'
     ]
     const classes = useStyles();
-        const [page, setPage] =useState(1);
-        const handleChange = (event, value) => {
-          setPage(value);
-        };     
-      function PaginationControlled({pages}) {
+    const [page, setPage] = useState(1);
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
+    function PaginationControlled({ pages }) {
         return (
-          <div className={classes.root} style={{margin: 'auto',width: '50%'}}>
-            <Typography >Page: {page}</Typography> 
-            <Pagination count={pages} page={page}  onChange={handleChange} variant="outlined" color="secondary"  />
-          </div>
+            <div className={classes.root} style={{ margin: 'auto', width: '50%' }}>
+                <Typography >Page: {page}</Typography>
+                <Pagination count={pages} page={page} onChange={handleChange} variant="outlined" color="secondary" />
+            </div>
         );
-      }
+    }
     const filterArray = [];
     filters.map((item, index) => {
         filterArray.push(<CheckboxLabels key={index} text={item} />)
     })
     function rowOfProdcts(array1) {
         const shownext8 = []
-        for(let i =(page-1)*8 ; i < ((page-1)*8)+8 && i<array1.length ; i++ ) {
+        for (let i = (page - 1) * 8; i < ((page - 1) * 8) + 8 && i < array1.length; i++) {
             shownext8.push(array1[i])
         }
         // console.log(array1);
@@ -443,17 +443,19 @@ function AllProudcts(props) {
     }
     let [allItemsShow, showMap] = useState(myproudcts);
 
+    //tofixed need fix up
+    let numberToSet = (allItemsShow.length / 8).toFixed(0);
+    if (allItemsShow.length % 8) {
+        numberToSet++;
+    }
 
-
-//tofixed need fix up
-
-    let [numberOfPages, newpages] = useState((allItemsShow.length/8).toFixed(0)); //when add filter need use it
+    let [numberOfPages, newpages] = useState(numberToSet); //when add filter need use it
     function lowToHigh() {
         let arrayToShow = allItemsShow.sort((item1, item2) => {
             return item1.price - item2.price;
-        }) 
+        })
         afterSort(arrayToShow)
-    } 
+    }
     function highToLow() {
         let arrayToShow = allItemsShow.sort((item1, item2) => {
             return item2.price - item1.price;
@@ -489,15 +491,15 @@ function AllProudcts(props) {
             </MDBContainer>
             <MDBContainer  >
                 {rowOfProdcts(allItemsShow)}
-                <br/>
+                <br />
                 <MDBRow>
                     <MDBCol></MDBCol>
-                    <MDBCol size={10}><PaginationControlled  pages={numberOfPages}/>  </MDBCol>
+                    <MDBCol size={10}><PaginationControlled pages={numberOfPages} />  </MDBCol>
                     <MDBCol></MDBCol>
                 </MDBRow>
-                                 
+
             </MDBContainer>
-            <br />            
+            <br />
         </div>
     );
 }

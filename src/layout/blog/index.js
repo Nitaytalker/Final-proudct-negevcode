@@ -13,13 +13,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Blog() {
-
     async function loadPosts() {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts/');
         const data = await response.json();
         return data;
     }
-
+    let showItemInPage =9;
     
     const [loadingState, setLoadingState] = useState(true)
     
@@ -29,7 +28,11 @@ function Blog() {
         loadPosts().then((data) => {
             setLoadingState(false);
             setBlogs(data)
-            newpages((data.length/12).toFixed(0))
+            let number = (data.length/showItemInPage).toFixed(0)
+            if(data.length%showItemInPage){
+              number++;
+            }
+            newpages(number)
         })
     }, [])
 
@@ -63,11 +66,9 @@ function Blog() {
       }
     function showPage(array) {
         const shownext12 = []
-        for(let i =(page-1)*12 ; i < ((page-1)*12)+12 && i<array.length ; i++ ) {
+        for(let i =(page-1)*showItemInPage ; i < ((page-1)*showItemInPage)+showItemInPage && i<array.length ; i++ ) {
             shownext12.push(array[i])
         }
-        // console.log(array);
-        // console.log(whatToShow);
         return (shownext12)
     }
 

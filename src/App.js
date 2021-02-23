@@ -12,6 +12,7 @@ import ShoppingCart from './layout/shoppingcart';
 import About from './layout/about';
 import SingelProudct from './layout/singelproudct';
 import Blog from './layout/blog'
+import Admin from './layout/admin'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path='/about' component={About}/>
           <Route exact path='/blog' component={Blog}/>
           <Route exact path='/singelproduct' component={SingelProudct}/>
+          <Route exact path='/admin' component={Admin}/>
         </Switch>
       </BrowserRouter>
 
