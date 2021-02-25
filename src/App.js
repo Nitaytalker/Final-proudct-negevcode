@@ -23,13 +23,15 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/home' component={HomePage} />
-          <Route exact path='/products' component={AllProudcts} />
+          <Route exact path='/products/:id' component={SingelProudct} />
+          <Route exact  path='/products' component={AllProudcts} /> 
           <Route exact path='/login' component={Login} />
           <Route exact path='/shoppingcart' component={ShoppingCart}/>
           <Route exact path='/about' component={About}/>
           <Route exact path='/blog' component={Blog}/>
           <Route exact path='/singelproduct' component={SingelProudct}/>
           <Route exact path='/admin' component={Admin}/>
+          
         </Switch>
       </BrowserRouter>
 

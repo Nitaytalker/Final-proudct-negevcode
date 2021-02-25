@@ -33,7 +33,7 @@ function Blog() {
               number++;
             }
             newpages(number)
-        })
+        }).catch("err")
     }, [])
 
     const list =blogs.map((item, index) => {
@@ -84,7 +84,7 @@ function Blog() {
                 <Row style={{ display: loadingState ? 'none' : 'flex' }}>
                     {showPage(list)}
                 </Row>
-                <Row>
+                <Row style={{ display: loadingState ? 'none' : 'flex' }}>
                     <Col></Col>
                     <Col size={10}><PaginationControlled  pages={numberOfPages}/>  </Col>
                     <Col></Col>
