@@ -8,21 +8,25 @@ const images = [
     url: 'https://images-na.ssl-images-amazon.com/images/I/712iPqGUc4L._AC_UX385_.jpg',
     title: 'T-shirt',
     width: '50%',
+    to:'/products/t-shirt',
   },
   {
     url: 'https://cdn.bike24.net/i/mb/5a/4d/ac/357440-00-d-768492.jpg',
     title: 'Pants',
     width: '50%',
+    to:'/products/pants',
   },
   {
     url: 'https://images-na.ssl-images-amazon.com/images/I/61zh7D5GkmL._UL1500_.jpg',
     title: 'jacket',
     width: '50%',
+    to:'/products/jacket',
   },
   {
     url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-best-nikes-1588011427.jpg?crop=1xw:1xh;center,top&resize=1200:*',
     title: 'Shoes',
     width: '50%',
+    to:'/products/shoes',
   },
 ];
 
@@ -107,6 +111,7 @@ export default function ButtonBases() {
       {images.map((image) => (
         <ButtonBase
           focusRipple
+          href={image.to}
           key={image.title}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
@@ -128,6 +133,7 @@ export default function ButtonBases() {
               color="inherit"
               className={classes.imageTitle}
             >
+              
               {image.title}
               <span className={classes.imageMarked} />
             </Typography>

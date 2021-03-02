@@ -1,9 +1,12 @@
-import { MDBBtn } from "mdbreact";
 import React, { Fragment } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import FormPage from "../card/formPage";
+import { useForm } from "react-hook-form";
+import {Link} from 'react-router-dom';
 
 function Login() {
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => console.log(data);
+  // console.log(watch("email"));
   const login = (
     <Container>
       <Row>
@@ -14,11 +17,12 @@ function Login() {
             <Row>
               <Col lg="2"></Col>
               <Col>
-                <Form style={{ color: "black" }}>
+                <Form onSubmit={handleSubmit(onSubmit)}  style={{ color: "black" }}>
                   <h1>Login</h1>
                   <Form.Group>
                     <Form.Label >Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="email" placeholder="Enter email" name="email" ref={register({ required: true })}/>
+                    {errors.email && <span>This field is required</span>}
                     <Form.Text style={{ color: "black" }}>
                       We'll never share your email with anyone else.
               </Form.Text>
@@ -26,10 +30,15 @@ function Login() {
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" name="emailPassword" ref={register({ required: true })}  />
+                    {errors.emailPassword && <span>This field is required</span>}
+                    <Form.Text style={{ color: "black" }}>
+                    <Link to="/signup">New account? Sign up now</Link>
+              </Form.Text>
                   </Form.Group>
+                  
                   <Fragment>
-                    <MDBBtn rounded color="danger" type="submit">Submit</MDBBtn>
+                    <Button type="submit" variant="danger">Submit</Button>
                   </Fragment>
                 </Form>
               </Col>

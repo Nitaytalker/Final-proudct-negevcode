@@ -13,6 +13,7 @@ import About from './layout/about';
 import SingelProudct from './layout/singelproudct';
 import Blog from './layout/blog'
 import Admin from './layout/admin'
+import Signup from "./layout/signup"
 
 function App() {
   return (
@@ -23,9 +24,11 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/home' component={HomePage} />
-          <Route exact path='/products/:id' component={SingelProudct} />
-          <Route exact  path='/products' component={AllProudcts} /> 
+          <Route exact path='/products/:category/:id' component={SingelProudct} />
+          <Route exact  path='/products/:category' component={AllProudcts} /> 
+          <Route   path='/products' component={AllProudcts} /> 
           <Route exact path='/login' component={Login} />
+          <Route exact path="/signup" component={Signup}/>
           <Route exact path='/shoppingcart' component={ShoppingCart}/>
           <Route exact path='/about' component={About}/>
           <Route exact path='/blog' component={Blog}/>
