@@ -118,7 +118,7 @@ export default function SingelProudct(props) {
             <br />
             <Mypic proudct={oneProduct[0]} />
             <br/><br /><br />
-            <div> <Button variant="danger">Back to shop</Button></div>
+            <div> <Button  href='/products'  variant="danger">Back to shop</Button></div>
         </div>
     );
 }

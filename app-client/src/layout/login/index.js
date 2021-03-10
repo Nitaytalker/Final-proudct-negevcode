@@ -30,7 +30,7 @@ function Login() {
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="emailPassword" ref={register({ required: true })}  />
+                    <Form.Control type="password" placeholder="Password" name="emailPassword" ref={register({ required: true,minLength:4 })}  />
                     {errors.emailPassword && <span>This field is required</span>}
                     <Form.Text style={{ color: "black" }}>
                     <Link to="/signup">New account? Sign up now</Link>
