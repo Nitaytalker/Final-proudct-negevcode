@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-
+import {Link} from 'react-router-dom'
 const images = [
   {
     url: 'https://images-na.ssl-images-amazon.com/images/I/712iPqGUc4L._AC_UX385_.jpg',
@@ -107,11 +107,12 @@ export default function ButtonBases() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       {images.map((image) => (
+        
         <ButtonBase
           focusRipple
-          href={image.to}
+          
           key={image.title}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
@@ -119,6 +120,7 @@ export default function ButtonBases() {
             width: image.width,
           }}
         >
+          <Link to={image.to}>
           <span
             className={classes.imageSrc}
             style={{
@@ -138,6 +140,8 @@ export default function ButtonBases() {
               <span className={classes.imageMarked} />
             </Typography>
           </span>
+          </Link>
+          
         </ButtonBase>
       ))}
     </div>

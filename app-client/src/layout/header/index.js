@@ -1,34 +1,58 @@
 import { Navbar, NavDropdown, FormControl, Button, Form, Nav } from "react-bootstrap";
-import React from 'react';
+import React, { useState } from 'react';
 import { GiShoppingCart } from "react-icons/gi";
+import { useForm } from "react-hook-form";
+import { Link,useHistory } from 'react-router-dom';
+import './header.css'
 // import TemporaryDrawer from "./headswipeable";
 
 
 function Header() {
-    
-    
+    const { register, handleSubmit, watch, errors } = useForm();
+    const [goTo, setGoTo] = useState("")
+    const onSubmit = data => setGoTo(data.Search);
+    const valueSearch = data => setGoTo(data.search);
+
+    let history = useHistory();
+
+    function handleClick() {
+      history.push(`/products/${goTo}`);
+    }
+
     return (
-        <div  className='header'>
-            <Navbar fixed="top" bg="dark" variant="dark"  expand="lg">
-                <Navbar.Brand href="/home" >Online-Shop</Navbar.Brand>
+        <div className='header'>
+            <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
+                <Navbar.Brand  ><Link to="/home">Online Shop</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" >
                     <Nav className="mr-auto" >
-                        <Nav.Link href="/home" style={{color:'#d9534f'}} >Home</Nav.Link>
-                        <Nav.Link href="/products" style={{color:'#d9534f'}} >All products</Nav.Link>
-                        <Nav.Link href="/login" style={{color:'#d9534f'}}>login</Nav.Link>
-                        <Nav.Link href="/shoppingcart" style={{color:'#d9534f'}}>  Shopping cart <GiShoppingCart style={{fontSize:"25px"}} /></Nav.Link>
-                        <Nav.Link href="/about" style={{color:'#d9534f'}}>  about </Nav.Link>
-                        <Nav.Link href="/blog" style={{color:'#d9534f'}}>  blog </Nav.Link>
+                        <Nav.Link><Link to="/home">Home</Link></Nav.Link>
+                        <Nav.Link style={{ color: "rgb(217, 83, 79)" }}>
+                            <Link to="/products"> All products</Link>
+                        </Nav.Link>
+                        <Nav.Link><Link to="/login">login</Link></Nav.Link>
+                        <Nav.Link> <Link to="/shoppingcart">Shopping Cart</Link><GiShoppingCart style={{ fontSize: "25px" }} /></Nav.Link>
+                        <Nav.Link><Link to="/about">about</Link> </Nav.Link>
+                        <Nav.Link > <Link to="/blog">blog</Link>  </Nav.Link>
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-danger">Search</Button>
+                    <Form onChange={handleSubmit(valueSearch)} inline>
+                        <FormControl 
+                        onKeyPress={event => {
+                            if (event.key === "Enter") {
+                                event.preventDefault()
+                                handleClick()
+                            }
+                          }}
+                        type="text" placeholder="Search" name="search" className="mr-sm-2"
+                            ref={register({ required: true })} />
+                        {/* {errors.search && <span>This field is required</span>} */}
+                        <Button variant="outline-danger">
+                            <Link to={`/products/${goTo}`} >Search</Link></Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
-            <br/><br/><br/>
-            
+            <br /><br /><br />
+
         </div>
     )
 }

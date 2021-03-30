@@ -2,10 +2,19 @@ import React, { Fragment } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import {Link} from 'react-router-dom';
+import {useEffect} from 'react'
+import { loginShop } from '../../api/products'
 
 function Login() {
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+},[])
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async data => {
+    // console.log(data)
+    const answer = await loginShop('users',data)
+    console.log(answer);
+  };
   // console.log(watch("email"));
   const login = (
     <Container>

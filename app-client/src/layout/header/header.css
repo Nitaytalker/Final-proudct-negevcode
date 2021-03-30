@@ -1,0 +1,7 @@
+a{
+    color: rgb(217, 83, 79)
+}
+a:hover {
+    color: rgb(218, 22, 15);
+    text-decoration: none;
+}

@@ -7,8 +7,11 @@ import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 import { makeStyles, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import "./index.css";
-import { myproudcts } from "./allArrayProducts";
+// import { myproudcts } from "./allArrayProducts";
+import { getAll } from '../../api/products'
 import { useParams } from 'react-router-dom'
+import MySpinner from "../spinner"
+import { Container, Row, Col, Image, Button, Card } from "react-bootstrap"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,15 +21,37 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+let myproudcts = []
+
 function AllProudcts(props) {
-    let categorypage=useParams().category
+    const [categorypage,setCategorypage] =useState(useParams().category)
+    const [loadingState, setLoadingState] = useState(true)
     // console.log(categorypage);
-    useEffect(()=>{
-        
-        if(categorypage){
+    useEffect(async () => {
+        window.scrollTo(0, 0)
+        const array = await getAll('products');
+        myproudcts = array.data
+        showMap([...array.data])
+        setLoadingState(false)
+        if (categorypage) {
             filterBy(categorypage)
         }
-    },[])
+    }, [])
+    let x=useParams().category;
+    // console.log(x); 
+    useEffect(()=>{
+        if(x && x!=categorypage){
+            setCategorypage(x)
+            filterBy(x)
+        }else if(!x && categorypage!='all-Product'){
+            console.log(x);
+            setCategorypage('all-Product')
+            filterBy('all-Product')
+        }
+    })
+   
+    
+    // console.log(loadingState);
     const filters = [
         't-shirt', 'pants', 'Shoes', 'Hats'
     ]
@@ -34,6 +59,7 @@ function AllProudcts(props) {
     const [page, setPage] = useState(1);
     const handleChange = (event, value) => {
         setPage(value);
+        window.scrollTo(0, 0)
     };
     function PaginationControlled({ pages }) {
         return (
@@ -62,38 +88,31 @@ function AllProudcts(props) {
         });
         // console.log(whatToShow);
         return (
-            <MDBRow>
-                <MDBCol md={1} ></MDBCol>
-                <MDBCol>
+            <Row className='justify-content-center'>
+                <Col md={1} ></Col>
+                <Col  className="justify-content-md-center">
                     <MDBCardGroup>
                         {/* {items} */}
                         {whatToShow}
                     </MDBCardGroup>
-                </MDBCol>
-            </MDBRow>
+                </Col>
+            </Row>
         )
     }
-    let [allItemsShow, showMap] = useState(myproudcts);
+    let [allItemsShow, showMap] = useState([]);
+    
 
-    //tofixed need fix up
-    let numberToSet = (allItemsShow.length / 8).toFixed(0);
-    if (allItemsShow.length % 8 < 4) {
-        numberToSet++;
-    }
-
-    let [numberOfPages, newpages] = useState(numberToSet); //when add filter need use it
-    useEffect(()=>{
-        let newSetNumber = (allItemsShow.length / 8).toFixed(0);
-        console.log("effect");
-        if (allItemsShow.length % 8 < 4) {
-            newSetNumber++;
-        }
+    let [numberOfPages, newpages] = useState(Math.ceil((allItemsShow.length / 8))); //when add filter need use it
+    useEffect(() => {
+        let newSetNumber = Math.ceil((allItemsShow.length / 8))
+        // console.log(newSetNumber);
         newpages(newSetNumber)
-    },[allItemsShow.length])
-   
+    }, [allItemsShow.length])
+
     function afterSort(arrayToShow) {
         setPage(1);
         showMap([...arrayToShow])
+        
     }
     function sortBy(toSort) {
         let arrayToShow = allItemsShow.sort((item1, item2) => {
@@ -112,47 +131,60 @@ function AllProudcts(props) {
     }
     function filterBy(tofilter) {
         // console.log(allItemsShow);
-        let arrayToShow = myproudcts.filter((item) => 
-            item.category == tofilter
+        if(tofilter==="all-Product")return afterSort(myproudcts)
+        let arrayToShow = myproudcts.filter((item) =>{
+            if(item.category == tofilter)return true
+            if(item.name==tofilter)return true
+            return false
+        }
+            
         )
         afterSort(arrayToShow)
-        
+
     }
     return (
-        <div className='allproudcts'>
-            <h1>All products </h1>
-            <MDBContainer  >
-                <MDBRow  >
-                    <MDBCol size='2'/>
-                    <MDBCol size='1' >
-                    <DropdownButton as={ButtonGroup} title="Category" variant="outline-danger" id="bg-nested-dropdown">
-                            <Dropdown.Item onClick={() => { filterBy("t-shirt") }} eventKey="1">t-shirt</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { filterBy("pants") }} eventKey="2">pants</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { filterBy("shoes") }} eventKey="3">Shoes</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { filterBy("jacket") }} eventKey="4">jacket</Dropdown.Item>
-                        </DropdownButton>
-                    </MDBCol>
-                    <MDBCol size='6'></MDBCol>
-                    <MDBCol size='1'>
-                        <DropdownButton as={ButtonGroup} title="Sort by" variant="outline-danger" id="bg-nested-dropdown">
-                            <Dropdown.Item onClick={() => { sortBy(1) }} eventKey="1">Low to high</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { sortBy(2) }} eventKey="2">High to low</Dropdown.Item>
-                            <Dropdown.Item eventKey="3">New item</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { sortBy(3) }} eventKey="4">By rating</Dropdown.Item>
-                        </DropdownButton>
-                    </MDBCol>
-                </MDBRow>
-                {rowOfProdcts(allItemsShow)}
-                <br />
-                <MDBRow>
-                    <MDBCol></MDBCol>
-                    <MDBCol size={10}><PaginationControlled pages={numberOfPages} />  </MDBCol>
-                    <MDBCol></MDBCol>
-                </MDBRow>
+        <div>
+            <Container style={{ display: loadingState ? 'flex' : 'none' }}>
+                <Col >
+                    <MySpinner />
+                </Col>
+            </Container>
 
-            </MDBContainer>
-            <br />
-        </div>
+            <div className='allproudcts' style={{ display: loadingState ? 'none' : 'block' }}>
+                <h1>{ categorypage !='all-Product' ? `your search : ${categorypage}`:'All products'} </h1>
+                <Container className='align-content-center' >
+                    <Row  >
+                        <Col lg='2' />
+                        <Col lg='1' >
+                            <DropdownButton as={ButtonGroup} title="Category" variant="outline-danger" id="bg-nested-dropdown">
+                            <Dropdown.Item onClick={() => { filterBy("all-Product") }} eventKey="1">All-Products</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { filterBy("t-shirt") }} eventKey="2">t-shirt</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { filterBy("pants") }} eventKey="3">pants</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { filterBy("shoes") }} eventKey="4">Shoes</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { filterBy("jacket") }} eventKey="5">jacket</Dropdown.Item>
+                            </DropdownButton>
+                        </Col>
+                        <Col lg='6'></Col>
+                        <Col lg='1'>
+                            <DropdownButton as={ButtonGroup} title="Sort by" variant="outline-danger" id="bg-nested-dropdown">
+                                <Dropdown.Item onClick={() => { sortBy(1) }} eventKey="1">Low to high</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { sortBy(2) }} eventKey="2">High to low</Dropdown.Item>
+                                <Dropdown.Item eventKey="3">New item</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { sortBy(3) }} eventKey="4">By rating</Dropdown.Item>
+                            </DropdownButton>
+                        </Col>
+                    </Row >
+                    {rowOfProdcts(allItemsShow)}
+                    <br />
+                    <Row>
+                        <Col></Col>
+                        <Col lg={10}><PaginationControlled pages={numberOfPages} />  </Col>
+                        <Col></Col>
+                    </Row>
+
+                </Container>
+                <br />
+            </div></div>
     );
 }
 

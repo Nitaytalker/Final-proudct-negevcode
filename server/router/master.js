@@ -10,17 +10,34 @@ router.get('/', (req, res) => {
         if (err) {
             res.status(500).send('error')
         } else {
-            const allImg = documents.map((product)=>{
-                const answer = product.img.map((e)=>{
-                    return `../public/images/${e}.jpg`
-                })
-                return answer;
-            })
-            console.log(allImg);
             res.status(200).send(documents);
         }
     })
 });
+
+router.get('/id/:id', (req, res) => {
+    productModel.find({id:req.params.id}, (err, documents) => {
+        if (err) {
+            res.status(500).send('error')
+        } else {
+            res.status(200).send(documents);
+        }
+    })
+});
+
+router.get('/category/:category', (req, res) => {
+    productModel.find({category:req.params.category}, (err, documents) => {
+        if (err) {
+            res.status(500).send('error')
+        } else {
+            res.status(200).send(documents);
+        }
+    })
+});
+
+// routet.find('/search',(req,res)=>{
+//     productModel.find
+// })
 
 
 module.exports = router;

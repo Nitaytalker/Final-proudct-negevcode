@@ -55,6 +55,7 @@ function Blog() {
         const [page, setPage] =useState(1);
         const handleChange = (event, value) => {
           setPage(value);
+          window.scrollTo(0, 0)
         };     
       function PaginationControlled({pages}) {
         return (

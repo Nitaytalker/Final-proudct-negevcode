@@ -1,4 +1,5 @@
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
+import {useEffect} from 'react'
 
 const aboutText = {
     title: "Online shop about page",
@@ -9,6 +10,9 @@ const aboutText = {
 }
 
 function About(props) {
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+    },[])
     const mycardabout = (<MDBRow>
         <MDBCol></MDBCol>
         <MDBCol style={{ maxWidth: "40rem" }}>

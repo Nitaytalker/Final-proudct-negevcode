@@ -2,10 +2,24 @@ import React, { Fragment } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { singUpShop } from '../../api/products'
 
 function Signup() {
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = async data => {
+        const answer = await singUpShop('users', data)
+        console.log(answer);
+        if (answer.status == 400) {
+            alert('bad')
+            return
+        } 
+        if (answer.status == 200) {
+            alert('sign up good')
+            return
+        } 
+        
+        
+    };
     // console.log(watch("email"));
     const login = (
         <Container>
@@ -44,7 +58,7 @@ function Signup() {
                                         <Form.Control type="password" placeholder="Password" name="emailPassword" ref={register({ required: true })} />
                                         {errors.emailPassword && <span>This field is required</span>}
                                         <Form.Text style={{ color: "black" }}>
-                                            
+
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group>

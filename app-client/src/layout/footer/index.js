@@ -11,10 +11,12 @@ function Footer() {
                         <FaRegCopyright /> All rights reserved to "Online-Shop".
             </Card.Text>
                     <ButtonGroup className="mr-2" aria-label="First group">
-                        <Button variant="danger"><ImFacebook2 /></Button>
+                    <a href="https://www.facebook.com/" target="_blank">
+                         <Button variant="danger"><ImFacebook2 /></Button></a>
                     </ButtonGroup>
                     <ButtonGroup className="mr-2" aria-label="First group">
-                        <Button variant="danger"><FaInstagram /></Button>
+                       <a href="https://www.instagram.com/" target="_blank">
+                       <Button variant="danger"><FaInstagram /></Button>  </a> 
                     </ButtonGroup>
                 </Card.Body>
             </Card>
