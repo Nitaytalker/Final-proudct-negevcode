@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Main from './layout/main';
+
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './layout/homepage';
 import AllProudcts from './layout/allproudcts';
@@ -20,11 +20,8 @@ function App() {
   const [cart, updateCart] = useContext(CartContext)
   
   const removeFromCart = (productForDelete,index)=>{
-    console.log(productForDelete);
     const newCartProducts = Object.values(cart.cart.productsForBuy)
     .filter((e,eindex)=>eindex!=index)
-    console.log(index);
-    console.log(newCartProducts);
     updateCart({
       ...cart,
       cart:{
@@ -37,8 +34,6 @@ function App() {
       }
     })
   }
-  // console.log(updateCartSingelProd);
-  // console.log(cart);
   return (
     <div className="App" >
 

@@ -7,8 +7,8 @@ const productSchema = new Schema({
     price: Number,
     star: Number,
     text:String,
-    category:String
-
+    category:String,
+    searchkey:[String]
 });
 
 module.exports = mongoose.model('products', productSchema);

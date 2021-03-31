@@ -17,7 +17,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { useContext } from 'react';
 import { CartContext } from '../context/cart-context'
 import { useForm } from "react-hook-form";
-// import {KeyboardArrowLeftIcon,KeyboardArrowRightIcon} from '@material-ui/icons'
 
 export default function SingelProudct() {
     const devUrl = "http://localhost:3002";
@@ -25,28 +24,24 @@ export default function SingelProudct() {
     const [oneProduct, setProduct] = useState({})
     const [picShow, setPicShow] = useState(1)
     const [alsoLike, setAlsoLike] = useState([])
-    const [idPage, setIdPage] = useState(useParams().id)
     const [forSlice1, setForSlice1] = useState(0)
     const { id }= useParams()
 
    
     useEffect(() => {
         async function fetchMyAPI() {
-            window.scrollTo(0, 0)
-            const data = await getById('products', idPage);
+            const data = await getById('products', id);
             setProduct(data.data[0])
             setLoadingState(false)
             const willLike = await getByCategory('products', data.data[0].category)
             setAlsoLike([...willLike.data])
             setPicShow(1)
             setForSlice1(0)
+            window.scrollTo(0, 0)
         }
         fetchMyAPI()
-    }, [idPage])
+    }, [id])
     let history = useHistory();
-    useEffect(()=>{
-        setIdPage(id)
-    },[id])//work bun not good
 
     function handleClick() {
        history.goBack()
@@ -79,7 +74,6 @@ export default function SingelProudct() {
             return (
                 <Row key={index}>
                     <img onClick={() => {
-                        console.log(index + 1);
                         setPicShow(index + 1)
                     }} style={{ height: "8rem" }} src={`${devUrl}/images/${pic}`}></img>
                 </Row>
@@ -91,9 +85,9 @@ export default function SingelProudct() {
     const likeImg = (images) => {
 
 
-        const answer = images.filter((e) => e.id != idPage).slice(forSlice1, forSlice1 + 4).map((img, index) => {
+        const answer = images.filter((e) => e.id != id).slice(forSlice1, forSlice1 + 4).map((img, index) => {
             return (
-                <Smallproudct key={index} product={img} setIdPage={setIdPage} sizeCol={1} size={13} />
+                <Smallproudct key={index} product={img} sizeCol={1} size={13} />
             )
         })
         return answer
@@ -104,58 +98,8 @@ export default function SingelProudct() {
         updateCartSingelProd(oneProduct, itemsToBuy, size)
     }
 
-    // const gallery = (images) => {
-    //     const mygallery = images.map((pic, index) => {
-    //         return (
-    //             <Card key={index} border="danger" style={{ width: '30rem' }}>
-    //                 <MDBCarouselItem itemId={index + 1}>
-    //                     <MDBView>
-    //                         <img
-    //                             className="d-block w-100"
-    //                             src={`${devUrl}/images/${pic}`}
-    //                             alt="First slide"
-    //                         />
-    //                         <MDBMask overlay="black-light" />
-    //                     </MDBView>
-    //                 </MDBCarouselItem>
-    //             </Card>
-    //         )
-    //     }
-    //     )
-    //     // console.log(mygallery);
-    //     return (
-    //         <MDBContainer>
-    //             <h1>{picShow}</h1>
-    //             <MDBCarousel
-    //                 activeItem={picShow}
-    //                 length={images.length}
-    //                 showControls={true}
-    //                 showIndicators={true}
-    //                 className="z-depth-1"
-    //             >
-    //                     { images.map((pic, index) => {
-    //         return (
-    //             <Card key={index} border="danger" style={{ width: '30rem' }}>
-    //                 <MDBCarouselItem itemId={index + 1}>
-    //                     <MDBView>
-    //                         <img
-    //                             className="d-block w-100"
-    //                             src={`${devUrl}/images/${pic}`}
-    //                             alt="First slide"
-    //                         />
-    //                         <MDBMask overlay="black-light" />
-    //                     </MDBView>
-    //                 </MDBCarouselItem>
-    //             </Card>
-    //         )})
-    //     }
-
-    //             </MDBCarousel>
-    //         </MDBContainer >
-    //     );
-    // }
+  
     let [size, setSize] = useState("size")
-    // console.log(Object.entries(oneProduct.sizeInStock)  );
     return (
         <div className='singelproudct'>
 
@@ -173,13 +117,10 @@ export default function SingelProudct() {
                             </Col>
                             <Col>
                                 <div className='pic'>
-
-                                    {/* <h1>{picShow}</h1> */}
                                     <MDBCarousel
 
                                         length={oneProduct.img.length}
                                         showControls={false}
-                                        // activeItem={false}
                                         showIndicators={false}
                                         interval={false}
                                         className="z-depth-1"
@@ -212,9 +153,6 @@ export default function SingelProudct() {
                                         </MDBCarouselInner>
                                     </MDBCarousel>
 
-
-                                    {/* {gallery(oneProduct.img)} */}
-
                                 </div>
                             </Col>
                             <br />
@@ -232,7 +170,7 @@ export default function SingelProudct() {
                                             title={size}
                                         >
                                             {oneProduct.sizeInStock ? Object.entries(oneProduct.sizeInStock).map((item, index) => {
-                                                return <Dropdown.Item disabled={!item[1]} onClick={() => setSize(item[0])} eventKey={index + 1}>{item[1] ? item[0] : <del>{item[0]}</del> }</Dropdown.Item>
+                                                return <Dropdown.Item key={index} disabled={!item[1]} onClick={() => setSize(item[0])} eventKey={index + 1}>{item[1] ? item[0] : <del>{item[0]}</del> }</Dropdown.Item>
                                             }) : <></>}
                                         </DropdownButton>
                                     </div>

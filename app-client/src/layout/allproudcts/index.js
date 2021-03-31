@@ -8,7 +8,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import "./index.css";
 // import { myproudcts } from "./allArrayProducts";
-import { getAll } from '../../api/products'
+import { getAll,toSearch } from '../../api/products'
 import { useParams } from 'react-router-dom'
 import MySpinner from "../spinner"
 import { Container, Row, Col, Image, Button, Card } from "react-bootstrap"
@@ -25,33 +25,31 @@ let myproudcts = []
 
 function AllProudcts(props) {
     const [categorypage,setCategorypage] =useState(useParams().category)
+    const {category}=useParams()
     const [loadingState, setLoadingState] = useState(true)
-    // console.log(categorypage);
     useEffect(async () => {
         window.scrollTo(0, 0)
-        const array = await getAll('products');
+        let array = {}
+        if(category){
+            array =await toSearch('products',category);
+        }else{
+            array = await getAll('products');
+        }
         myproudcts = array.data
         showMap([...array.data])
         setLoadingState(false)
-        if (categorypage) {
-            filterBy(categorypage)
-        }
-    }, [])
+        
+    }, [category])
     let x=useParams().category;
-    // console.log(x); 
     useEffect(()=>{
         if(x && x!=categorypage){
             setCategorypage(x)
             filterBy(x)
         }else if(!x && categorypage!='all-Product'){
-            console.log(x);
             setCategorypage('all-Product')
             filterBy('all-Product')
         }
     })
-   
-    
-    // console.log(loadingState);
     const filters = [
         't-shirt', 'pants', 'Shoes', 'Hats'
     ]
@@ -80,13 +78,11 @@ function AllProudcts(props) {
         for (let i = (page - 1) * 8; i < ((page - 1) * 8) + 8 && i < array1.length; i++) {
             shownext8.push(array1[i])
         }
-        // console.log(array1);
         let whatToShow = [];
         shownext8.map((element, index) => {
 
             whatToShow.push(<Smallproudct product={element} key={index} />)
         });
-        // console.log(whatToShow);
         return (
             <Row className='justify-content-center'>
                 <Col md={1} ></Col>
@@ -105,7 +101,6 @@ function AllProudcts(props) {
     let [numberOfPages, newpages] = useState(Math.ceil((allItemsShow.length / 8))); //when add filter need use it
     useEffect(() => {
         let newSetNumber = Math.ceil((allItemsShow.length / 8))
-        // console.log(newSetNumber);
         newpages(newSetNumber)
     }, [allItemsShow.length])
 
@@ -130,7 +125,6 @@ function AllProudcts(props) {
         afterSort(arrayToShow)
     }
     function filterBy(tofilter) {
-        // console.log(allItemsShow);
         if(tofilter==="all-Product")return afterSort(myproudcts)
         let arrayToShow = myproudcts.filter((item) =>{
             if(item.category == tofilter)return true

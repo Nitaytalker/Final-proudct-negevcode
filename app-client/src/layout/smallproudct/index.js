@@ -2,17 +2,13 @@ import { MDBCard, MDBCardTitle, MDBBtn, MDBCardImage, MDBCardText, MDBCardBody, 
 import Star from "../star/star"
 import {Link,NavLink} from 'react-router-dom';
 
-function Smallproudct({product,setIdPage,size,sizeCol}) {
-    // console.log(props.product.category);
+function Smallproudct({product,size,sizeCol}) {
     const devUrl = "http://localhost:3002";
         return (
              <MDBCol xs={sizeCol ? '2' : null}  xl={sizeCol? null : '3'} >
                 {/* <NavLink href="#x"> */}
                
-            <Link onClick={()=>{
-                if(setIdPage)setIdPage(product.id)
-                }}
-                 to={`/products/${product.category}/${product.id}`} 
+            <Link to={`/products/${product.category}/${product.id}`} 
                  style={{ textDecoration: 'none' }}>
             <MDBCard className="p-2 w-100 " style={{ margin:'0',maxWidth:  size ? `${size}rem` : "15rem" }} >
                 <MDBCardImage  src={`${devUrl}/images/${product.img[0]}`} alt="MDBCard image cap" top hover

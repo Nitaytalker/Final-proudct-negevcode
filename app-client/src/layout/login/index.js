@@ -11,11 +11,16 @@ function Login() {
 },[])
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async data => {
-    // console.log(data)
-    const answer = await loginShop('users',data)
-    console.log(answer);
+    try{
+       await loginShop('users',data)
+      alert('login sucsess')
+    }
+    catch(err){
+      alert('try again')
+    }
+    
+    
   };
-  // console.log(watch("email"));
   const login = (
     <Container>
       <Row>

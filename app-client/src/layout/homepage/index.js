@@ -10,9 +10,6 @@ function HomePage(props) {
     useEffect(()=>{
         window.scrollTo(0, 0)
     },[])
-    useEffect(()=>{
-        console.log("..............");
-    },[window.innerHeight])
     const myimagebutton = (
         <MDBContainer className="bg" style={{ margin: '' }}>
             <br /><br />

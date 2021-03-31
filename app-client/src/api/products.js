@@ -19,3 +19,7 @@ export function loginShop(resource,body) {
 export function singUpShop(resource,body) {
     return axios.post(`http://localhost:3002/${resource}/singup` ,  body )
 }
+
+export function toSearch(resource,toFind) {
+    return axios.get(`http://localhost:3002/${resource}/search/${toFind}`  )
+}

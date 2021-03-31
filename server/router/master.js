@@ -24,6 +24,23 @@ router.get('/id/:id', (req, res) => {
         }
     })
 });
+// ({$or:[ {bookName: req.params.searchedWord}
+//      , {author: req.params.searchedWord}, {category: req.params.searchedWord}]}
+
+router.get('/search/:toSearch', (req, res) => {
+    productModel.find({$or:[
+        {name:req.params.toSearch},
+        {category:req.params.toSearch},
+       { searchkey: { "$regex": req.params.toSearch, "$options": "i" }}
+    ] }, (err, documents) => {
+        if (err) {
+            res.status(500).send('error')
+        } else {
+            res.status(200).send(documents);
+        }
+        
+    })
+});
 
 router.get('/category/:category', (req, res) => {
     productModel.find({category:req.params.category}, (err, documents) => {

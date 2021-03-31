@@ -5,7 +5,7 @@ import { MdDeleteForever } from "react-icons/md"
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { CartContext } from '../context/cart-context'
-
+import IconButton from '@material-ui/core/IconButton';
 function ShoppingCart({ removeFromCart }) {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -113,10 +113,10 @@ function ShoppingCart({ removeFromCart }) {
                             <h6>Size: {item.productSize}</h6>
                             <h6>Total: {item.product.price * item.productItemsForBuy}$</h6>
                         </Col>
-                        <Col md={3}>
+                        <Col md={2}>
                         </Col>
-                        <Col md={1}>
-                            <MdDeleteForever onClick={() => removeFromCart(item, index)} style={{ fontSize: "30px" }} />
+                        <Col md={2}>
+                            <IconButton><MdDeleteForever onClick={() => removeFromCart(item, index)} style={{ fontSize: "30px" }} /></IconButton>
                         </Col>
                     </Row>
                 </Container>
