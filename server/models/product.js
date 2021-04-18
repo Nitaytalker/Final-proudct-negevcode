@@ -10,5 +10,4 @@ const productSchema = new Schema({
     category:String,
     searchkey:[String]
 });
-
 module.exports = mongoose.model('products', productSchema);

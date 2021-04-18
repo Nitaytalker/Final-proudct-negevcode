@@ -23,3 +23,11 @@ export function singUpShop(resource,body) {
 export function toSearch(resource,toFind) {
     return axios.get(`http://localhost:3002/${resource}/search/${toFind}`  )
 }
+
+export function sendMail(resource,body,token){
+    return axios.post(`http://localhost:3002/${resource}`,body,{  headers: {token} }   )
+}
+
+export function checkToken(resource,body,token){
+    return axios.post(`http://localhost:3002/${resource}/checktoken`, body,{  headers: {token} }  )
+}

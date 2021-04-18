@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useContext } from 'react';
+import { CartContext } from '../context/cart-context'
 import {Link} from 'react-router-dom';
 import {useEffect} from 'react'
 import { loginShop } from '../../api/products'
@@ -9,18 +11,26 @@ function Login() {
   useEffect(()=>{
     window.scrollTo(0, 0)
 },[])
+const [cart, updateCart] = useContext(CartContext)
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async data => {
+      const email = data.email;
     try{
-       await loginShop('users',data)
+       const answer =  await loginShop('users',data)
+       console.log(answer.data);
+       updateCart({
+         ...cart,
+         token:answer.data.token,
+         email:email,
+         userName:answer.data.firstname
+       }) 
       alert('login sucsess')
     }
     catch(err){
       alert('try again')
-    }
-    
-    
   };
+}
+  // console.log(cart);
   const login = (
     <Container>
       <Row>

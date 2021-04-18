@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 const cartObject = {
     userName:'?',
     email:'?@',
+    token:'',
     cart:{
         numberOfItems:0,
         productsForBuy:[

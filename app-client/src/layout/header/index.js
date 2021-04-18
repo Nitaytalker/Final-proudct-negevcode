@@ -5,20 +5,21 @@ import { useForm } from "react-hook-form";
 import { Link,useHistory } from 'react-router-dom';
 import './header.css'
 // import TemporaryDrawer from "./headswipeable";
-
+import { useContext } from 'react';
+import { CartContext } from '../context/cart-context'
 
 function Header() {
     const { register, handleSubmit, watch, errors } = useForm();
     const [goTo, setGoTo] = useState("")
     const onSubmit = data => setGoTo(data.Search);
     const valueSearch = data => setGoTo(data.search);
-
+    const [cart, updateCart] = useContext(CartContext)
     let history = useHistory();
 
     function handleClick() {
       history.push(`/products/${goTo}`);
     }
-
+console.log(cart);
     return (
         <div className='header'>
             <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
@@ -30,11 +31,14 @@ function Header() {
                         <Nav.Link style={{ color: "rgb(217, 83, 79)" }}>
                             <Link to="/products"> All products</Link>
                         </Nav.Link>
-                        <Nav.Link><Link to="/login">login</Link></Nav.Link>
                         <Nav.Link> <Link to="/shoppingcart">Shopping Cart</Link><GiShoppingCart style={{ fontSize: "25px" }} /></Nav.Link>
-                        <Nav.Link><Link to="/about">about</Link> </Nav.Link>
-                        <Nav.Link > <Link to="/blog">blog</Link>  </Nav.Link>
+                        
                     </Nav>
+                    {
+                        cart.token ? <Nav.Link>Hello {cart.userName} </Nav.Link> : <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+                    }
+                    
+
                     <Form onChange={handleSubmit(valueSearch)} inline>
                         <FormControl 
                         onKeyPress={event => {

@@ -85,7 +85,7 @@ function AllProudcts(props) {
         });
         return (
             <Row className='justify-content-center'>
-                <Col md={1} ></Col>
+                {/* <Col md={1} ></Col> */}
                 <Col  className="justify-content-md-center">
                     <MDBCardGroup>
                         {/* {items} */}

@@ -3,10 +3,14 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { singUpShop } from '../../api/products'
+import { useContext } from 'react';
+import { CartContext } from '../context/cart-context'
 
 function Signup() {
     const { register, handleSubmit, watch, errors } = useForm();
+    const [cart, updateCart] = useContext(CartContext)
     const onSubmit = async data => {
+        const email = data.email;
         const answer = await singUpShop('users', data)
         console.log(answer);
         if (answer.status == 400) {
@@ -14,10 +18,14 @@ function Signup() {
             return
         } 
         if (answer.status == 200) {
+            updateCart({
+                ...cart,
+                token:answer.data.token,
+                email:email
+              }) 
             alert('sign up good')
             return
         } 
-        
         
     };
     // console.log(watch("email"));
