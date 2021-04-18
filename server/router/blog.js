@@ -14,6 +14,10 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/hello', (req, res) => {
+    res.status(200).send("hello from server")
+});
+
 router.post('/',(req, res) =>{
     const newblog = new blogModel({
         ...req.body
