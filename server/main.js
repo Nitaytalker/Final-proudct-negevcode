@@ -20,9 +20,11 @@ app.use('/blog',blog);
 app.use('/products',master);
 app.use('/users',users);
 app.use('/email',email);
+app.use('/',blog);
 
 
-app.listen(3002,()=>console.log('server run...'))
+
+app.listen(process.env.PORT ||3002,()=>console.log('server run...'))
 
 // const devUrl = "http://localgost:3002";
 
