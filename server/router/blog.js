@@ -5,6 +5,10 @@ const router = express.Router();
 const blogModel = require('../models/blog')
 
 router.get('/', (req, res) => {
+    res.status(200).send("hello from server")
+});
+
+router.get('/', (req, res) => {
     blogModel.find({},(err,document)=>{
         if(err){
             res.status(500).send(err)
@@ -14,9 +18,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/hello', (req, res) => {
-    res.status(200).send("hello from server")
-});
+
 
 
 router.post('/',(req, res) =>{

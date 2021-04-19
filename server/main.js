@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 app.use('/blog',blog);
 app.use('/products',master);
 app.use('/users',users);
@@ -24,7 +25,7 @@ app.use('/',blog);
 
 
 
-app.listen(process.env.PORT ||3002,()=>console.log('server run...'))
+app.listen(process.env.PORT || 3002,()=>console.log('server run...'))
 
 // const devUrl = "http://localgost:3002";
 
