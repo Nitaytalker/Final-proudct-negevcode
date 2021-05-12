@@ -7,6 +7,7 @@ import './header.css'
 // import TemporaryDrawer from "./headswipeable";
 import { useContext } from 'react';
 import { CartContext } from '../context/cart-context'
+import CustomizedBadges from './carticon'
 
 function Header() {
     const { register, handleSubmit, watch, errors } = useForm();
@@ -19,7 +20,6 @@ function Header() {
     function handleClick() {
       history.push(`/products/${goTo}`);
     }
-console.log(cart);
     return (
         <div className='header'>
             <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
@@ -31,11 +31,12 @@ console.log(cart);
                         <Nav.Link style={{ color: "rgb(217, 83, 79)" }}>
                             <Link to="/products"> All products</Link>
                         </Nav.Link>
-                        <Nav.Link> <Link to="/shoppingcart">Shopping Cart</Link><GiShoppingCart style={{ fontSize: "25px" }} /></Nav.Link>
+                        <Nav.Link> <Link to="/shoppingcart">Shopping Cart <CustomizedBadges /></Link></Nav.Link>
                         
                     </Nav>
                     {
-                        cart.token ? <Nav.Link>Hello {cart.userName} </Nav.Link> : <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+                        cart.token ? <Nav.Link>Hello {cart.userName.charAt(0).toUpperCase()+cart.userName.slice(1)} </Nav.Link> 
+                        : <Nav.Link><Link to="/login">Login</Link></Nav.Link>
                     }
                     
 

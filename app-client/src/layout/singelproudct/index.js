@@ -1,5 +1,4 @@
 import { Col, Container, Button, Row, InputGroup, FormControl, Card, Dropdown, DropdownButton, ButtonGroup,Form } from "react-bootstrap";
-import { BsStarFill, BsStar, BsStarHalf, BsArrowRightShort } from "react-icons/bs";
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { GiShoppingCart } from "react-icons/gi";
 import Star from "../star/star"

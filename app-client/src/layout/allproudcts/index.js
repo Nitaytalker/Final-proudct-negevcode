@@ -3,11 +3,9 @@ import Smallproudct from "../smallproudct";
 import CheckboxLabels from "../checkbox";
 import React, { useEffect, useState } from "react";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
-// import PaginationControlled  from "../myPagination";
 import { makeStyles, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import "./index.css";
-// import { myproudcts } from "./allArrayProducts";
 import { getAll,toSearch } from '../../api/products'
 import { useParams } from 'react-router-dom'
 import MySpinner from "../spinner"

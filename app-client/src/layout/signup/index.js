@@ -12,7 +12,6 @@ function Signup() {
     const onSubmit = async data => {
         const email = data.email;
         const answer = await singUpShop('users', data)
-        console.log(answer);
         if (answer.status == 400) {
             alert('bad')
             return
@@ -28,7 +27,6 @@ function Signup() {
         } 
         
     };
-    // console.log(watch("email"));
     const login = (
         <Container>
             <Row>

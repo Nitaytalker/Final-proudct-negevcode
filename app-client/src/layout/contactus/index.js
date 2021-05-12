@@ -13,11 +13,9 @@ function ContactUs(){
       const answer={}
       try{
          answer = await sendMail('email',data,cart.token)
-        console.log(".....");
       }
       catch(err){
         alert("Opss!!!\nNeed login")
-        console.log(err);
       }
         
         
@@ -25,17 +23,6 @@ function ContactUs(){
     let history = useHistory();
     useEffect(()=>{
       window.scrollTo(0, 0)
-  //     const answer = checkToken('users',{}, cart.token )
-  //     console.log(answer);
-  //     console.log(Object.keys(answer));
-  //     if (answer.status == 400) {
-  //       alert('error: need login')
-  //       history.push(`/login`);
-  //       return
-  //   } 
-  //   if (answer.status == 200) {
-  //     return
-  // } 
     },[])
     
 

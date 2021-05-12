@@ -4,9 +4,7 @@ const express = require('express');
 const router = express.Router();
 const blogModel = require('../models/blog')
 
-router.get('/', (req, res) => {
-    res.status(200).send("hello from server")
-});
+
 
 router.get('/', (req, res) => {
     blogModel.find({},(err,document)=>{
@@ -18,7 +16,9 @@ router.get('/', (req, res) => {
     })
 });
 
-
+router.get('/', (req, res) => {
+    res.status(200).send("hello from server")
+});
 
 
 router.post('/',(req, res) =>{

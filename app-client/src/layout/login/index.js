@@ -17,7 +17,6 @@ const [cart, updateCart] = useContext(CartContext)
       const email = data.email;
     try{
        const answer =  await loginShop('users',data)
-       console.log(answer.data);
        updateCart({
          ...cart,
          token:answer.data.token,
@@ -30,7 +29,6 @@ const [cart, updateCart] = useContext(CartContext)
       alert('try again')
   };
 }
-  // console.log(cart);
   const login = (
     <Container>
       <Row>

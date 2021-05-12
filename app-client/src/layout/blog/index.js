@@ -28,7 +28,6 @@ function Blog() {
 
   useEffect(async () => {
    const array = await getAll('blog');
-    console.log(array.data);
     setLoadingState(false);
     setBlogs(array.data)
   },[])

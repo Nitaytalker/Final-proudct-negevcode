@@ -1,19 +1,13 @@
 
   .bg {
-    background-image: url("https://okawaclothing.com/wp-content/uploads/2018/08/Shopping-Online-1-768x384.jpg");
-    height: 50vh;
+    background-image: url("https://entrackr.com/wp-content/uploads/2019/10/E-commerce....-1200x600.jpg");
+    height: 300px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
 
-  .buttonbackg {
-    background-image: url("https://okawaclothing.com/wp-content/uploads/2018/08/Shopping-Online-1-768x384.jpg");
-    height: 50vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  
 
 .backImg{
   background-color: #cccccc;

@@ -15,12 +15,10 @@ function ShoppingCart({ removeFromCart }) {
     
     const devUrl = "http://localhost:3002";
     const [cart, updateCart] = useContext(CartContext)
-    // console.log(cart.cart.productsForBuy);
 
 
     
     let itemlist = cart.cart.productsForBuy.map((item, index) => {
-        // console.log(item);
         return (
             <Row className="border" key={index}>
                 <Container>
@@ -51,7 +49,6 @@ function ShoppingCart({ removeFromCart }) {
             </Row>
         )
     })
-    // console.log(itemlist);
     return (
         <div className='shoppingcart'>
             <h1>ShoppingCart</h1>
@@ -76,7 +73,7 @@ function ShoppingCart({ removeFromCart }) {
                             <h2>Total</h2>
                             <h3>Sub-total :{cart.cart.totalPrice} $</h3>
                             <Button variant="danger">Checkout</Button>
-                            <YourComponent/>
+                            {/* <YourComponent/> */}
                         </Col>
                     </Col>
                 </Row>

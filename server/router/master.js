@@ -8,7 +8,7 @@ const productModel = require('../models/product')
 router.get('/', (req, res) => {
     productModel.find({}, (err, documents) => {
         if (err) {
-            res.status(500).send('error')
+            res.status(500).send('error');
         } else {
             res.status(200).send(documents);
         }
