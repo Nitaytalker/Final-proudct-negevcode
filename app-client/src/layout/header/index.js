@@ -28,10 +28,13 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav" >
                     <Nav className="mr-auto" >
                         <Nav.Link><Link to="/home">Home</Link></Nav.Link>
-                        <Nav.Link style={{ color: "rgb(217, 83, 79)" }}>
+                        <Nav.Link >
                             <Link to="/products"> All products</Link>
                         </Nav.Link>
                         <Nav.Link> <Link to="/shoppingcart">Shopping Cart <CustomizedBadges /></Link></Nav.Link>
+                        {cart.key ==='adminkey' ?
+                         <Nav.Link> <Link to="/admin">Admin </Link></Nav.Link>
+                        :<> </>}
                         
                     </Nav>
                     {

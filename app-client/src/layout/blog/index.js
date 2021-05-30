@@ -27,10 +27,10 @@ function Blog() {
   const [blogs, setBlogs] = useState([])
 
   useEffect(async () => {
-   const array = await getAll('blog');
+    const array = await getAll('blog');
     setLoadingState(false);
     setBlogs(array.data)
-  },[])
+  }, [])
   // useEffect(() => {
   //   loadPosts().then((data) => {
   //     setLoadingState(false);
@@ -44,15 +44,15 @@ function Blog() {
   // }, [])
   const devUrl = "http://localhost:3002";
   const list = blogs.map((item, index) => {
-    const text = item.text.slice(0,60)
-    const title = item.title.slice(0,35)
-    return <Col md={4} key={index} style={{}}>
-      <Card style={{ width: '18rem', height: '300px' }}>
+    const text = item.text.slice(0, 60)
+    const title = item.title.slice(0, 35)
+    return <Col lg={4} key={index} >
+      <Card style={{  height: '350px' }}>
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title className='texttitle'>{item.title}</Card.Title>
           {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
           <Card.Img className='blogimg' variant="top" src={`${devUrl}/images/${item.img}`} />
-          <Card.Text>{text}...</Card.Text>
+          <Card.Text className='textbody'>{item.text}...</Card.Text>
           <Card.Link href={item.url} target="_blank">Go Read</Card.Link>
           {/* <Card.Link href="#">Another Link</Card.Link> */}
         </Card.Body>
@@ -88,14 +88,16 @@ function Blog() {
 
   return (
     <div className="blog">
-      <Container>
-        <Row style={{ display: loadingState ? 'block' : 'none' }}>
+      <Container style={{ display: loadingState ? 'block' : 'none' }}>
+        <Row >
           <MySpinner />
         </Row>
-        <Row style={{ display: loadingState ? 'none' : 'flex' }}>
+      </Container>
+      <Container style={{ display: loadingState ? 'none' : 'block' }}>
+        <Row >
           {showPage(list)}
         </Row>
-        <Row style={{ display: loadingState ? 'none' : 'flex' }}>
+        <Row >
           <Col></Col>
           <Col size={10}><PaginationControlled pages={numberOfPages} />  </Col>
           <Col></Col>

@@ -20,7 +20,12 @@ router.get('/id/:id', (req, res) => {
         if (err) {
             res.status(500).send('error')
         } else {
-            res.status(200).send(documents);
+            if(documents.length){
+                res.status(200).send(documents);
+            }else{
+                res.status(404).send(documents);
+            }
+            
         }
     })
 });

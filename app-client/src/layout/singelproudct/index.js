@@ -1,4 +1,4 @@
-import { Col, Container, Button, Row, InputGroup, FormControl, Card, Dropdown, DropdownButton, ButtonGroup,Form } from "react-bootstrap";
+import { Col, Container, Button, Row, InputGroup, FormControl, Card, Dropdown, DropdownButton, ButtonGroup, Form } from "react-bootstrap";
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { GiShoppingCart } from "react-icons/gi";
 import Star from "../star/star"
@@ -9,7 +9,7 @@ import { getById, getByCategory } from '../../api/products'
 import MySpinner from "../spinner"
 import './singelProduct.css'
 import Smallproudct from '../smallproudct'
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,26 +24,45 @@ export default function SingelProudct() {
     const [picShow, setPicShow] = useState(1)
     const [alsoLike, setAlsoLike] = useState([])
     const [forSlice1, setForSlice1] = useState(0)
-    const { id }= useParams()
+    const { id } = useParams()
 
-   
+
     useEffect(() => {
         async function fetchMyAPI() {
-            const data = await getById('products', id);
-            setProduct(data.data[0])
-            setLoadingState(false)
-            const willLike = await getByCategory('products', data.data[0].category)
-            setAlsoLike([...willLike.data])
-            setPicShow(1)
-            setForSlice1(0)
-            window.scrollTo(0, 0)
+            try {
+                const data = await getById('products', id);
+                console.log(data);
+                setProduct(data.data[0])
+                setLoadingState(false)
+                const willLike = await getByCategory('products', data.data[0].category)
+                console.log(willLike);
+                setAlsoLike([...willLike.data])
+                setPicShow(1)
+                setForSlice1(0)
+                window.scrollTo(0, 0)
+            }
+            catch (error) {
+                switch (error.response.status) {
+                    case 404:
+                        history.push(`/products`);
+                        console.log("404");
+                        break;
+                    case 500:
+                        history.push(`/products`);
+                        console.log("500");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
         fetchMyAPI()
     }, [id])
     let history = useHistory();
 
     function handleClick() {
-       history.goBack()
+        history.goBack()
     }
     const [cart, updateCart] = useContext(CartContext)
     const updateCartSingelProd = (product, numberOfItem, size) => {
@@ -71,14 +90,18 @@ export default function SingelProudct() {
     const smallImg = (imgArray) => {
         const answer = imgArray.map((pic, index) => {
             return (
-                <Row key={index}>
+                <Col key={index} size='1'>
                     <img onClick={() => {
                         setPicShow(index + 1)
                     }} style={{ height: "8rem" }} src={`${devUrl}/images/${pic}`}></img>
-                </Row>
+                </Col>
             )
         })
-        return answer
+        return <Container>
+            <Row>
+                {answer}
+            </Row>
+        </Container>
     }
 
     const likeImg = (images) => {
@@ -97,7 +120,7 @@ export default function SingelProudct() {
         updateCartSingelProd(oneProduct, itemsToBuy, size)
     }
 
-  
+
     let [size, setSize] = useState("size")
     return (
         <div className='singelproudct'>
@@ -110,11 +133,11 @@ export default function SingelProudct() {
                     <h1>{oneProduct.name}</h1>
                     <br />
                     <Container>
-                        <Row>
-                            <Col xs={1}>
+                        <Row >
+                            <Col className="justify-content-md-center" size={2} lg={2}>
                                 {smallImg(oneProduct.img)}
                             </Col>
-                            <Col>
+                            <Col className="justify-content-md-center" lg={7}>
                                 <div className='pic'>
                                     <MDBCarousel
 
@@ -128,7 +151,7 @@ export default function SingelProudct() {
 
                                             {oneProduct.img.map((pic, index) => {
                                                 return (
-                                                    <Card key={index} border="danger" style={{ width: '35rem' }}>
+                                                    <Card key={index} border="danger" style={{ maxWidth: '32rem' }}>
                                                         <MDBCarouselItem className={index + 1 == picShow ? 'active' : null} >
                                                             <MDBView>
                                                                 <Container>
@@ -155,7 +178,7 @@ export default function SingelProudct() {
                                 </div>
                             </Col>
                             <br />
-                            <Col>
+                            <Col className="justify-content-md-center" size={12} lg={3}>
                                 <div className='allabout'>
                                     <br /><br /><br /><br /><br />
                                     <div> price: {oneProduct.price}$ </div>
@@ -169,16 +192,16 @@ export default function SingelProudct() {
                                             title={size}
                                         >
                                             {oneProduct.sizeInStock ? Object.entries(oneProduct.sizeInStock).map((item, index) => {
-                                                return <Dropdown.Item key={index} disabled={!item[1]} onClick={() => setSize(item[0])} eventKey={index + 1}>{item[1] ? item[0] : <del>{item[0]}</del> }</Dropdown.Item>
+                                                return <Dropdown.Item key={index} disabled={!item[1]} onClick={() => setSize(item[0])} eventKey={index + 1}>{item[1] ? item[0] : <del>{item[0]}</del>}</Dropdown.Item>
                                             }) : <></>}
                                         </DropdownButton>
                                     </div>
                                     <br />
                                     <Form onSubmit={handleSubmit(onSubmit)}>
-                                    <div>
-                                        <Row className="justify-content-md-center">
-                                            <Col lg="5">
-                                                
+                                        <div>
+                                            <Row className="justify-content-md-center">
+                                                <Col lg="5">
+
                                                     <InputGroup className="mb-3">
                                                         <InputGroup.Prepend>
                                                             <InputGroup.Text id="inputGroup-sizing-default">Items</InputGroup.Text>
@@ -194,12 +217,12 @@ export default function SingelProudct() {
                                                         />
                                                         {errors.itemsForBuy && <span>This field is required</span>}
                                                     </InputGroup>
-                                                
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                    <div> <Button  type="submit" variant="danger">Add to cart<GiShoppingCart style={{ fontSize: "25px" }} /></Button></div>
-                                    <br />
+
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div> <Button type="submit" variant="danger">Add to cart<GiShoppingCart style={{ fontSize: "25px" }} /></Button></div>
+                                        <br />
                                     </Form>
                                     <div>  <Star numberOfStar={oneProduct.star} /> </div>
                                 </div>
@@ -224,7 +247,7 @@ export default function SingelProudct() {
                             <Col><IconButton disabled={alsoLike.length - 1 <= 4 || forSlice1 + 4 > alsoLike.length} onClick={() => setForSlice1(forSlice1 + 4)}><KeyboardArrowRightIcon fontSize="large" /></IconButton></Col>
                         </Row>
                     </Container>
-                    <br /><br /><br /> 
+                    <br /><br /><br />
                     <div> <Button onClick={() => handleClick()} variant="danger">Back</Button></div>
                 </div>
             }

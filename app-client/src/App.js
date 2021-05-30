@@ -11,7 +11,8 @@ import ShoppingCart from './layout/shoppingcart';
 import About from './layout/about';
 import SingelProudct from './layout/singelproudct';
 import Blog from './layout/blog'
-import Admin from './layout/admin'
+import AdminUsers from './layout/admin/users'
+import Admin from './layout/admin/admin'
 import Signup from "./layout/signup"
 import ContactUs  from './layout/contactus'
 import {useContext} from 'react';
@@ -36,8 +37,6 @@ function App() {
   }
   return (
     <div className="App" >
-
-
       <BrowserRouter>
         <Header />
         <Switch>         
@@ -51,14 +50,12 @@ function App() {
             <Route exact path='/about' component={About} />
             <Route exact path='/blog' component={Blog} />
             {/* <Route exact path='/singelproduct' component={()=><SingelProudct updateCartSingelProd={updateCartSingelProd}/>}  /> */}
-            <Route exact path='/admin' component={Admin} />
+            <Route  path='/admin' component={Admin} />
             <Route exact path='/contact-us' component={ContactUs} />
             <Route path='/' component={HomePage} />
         </Switch>
         <Footer />
       </BrowserRouter>
-
-      
     </div>
   );
 }

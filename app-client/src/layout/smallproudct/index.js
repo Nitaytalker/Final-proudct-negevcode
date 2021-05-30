@@ -1,16 +1,17 @@
 import { MDBCard, MDBCardTitle, MDBBtn, MDBCardImage, MDBCardText, MDBCardBody, MDBCol } from "mdbreact";
 import Star from "../star/star"
 import {Link,NavLink} from 'react-router-dom';
-
+import './smallproduct.css'
 function Smallproudct({product,size,sizeCol}) {
     const devUrl = "http://localhost:3002";
         return (
-             <MDBCol xs={sizeCol ? '2' : null}  xl={sizeCol? null : '3'} >
+             <MDBCol className='d-flex justify-content-center'  xs={sizeCol ? '2' : null}
+              size={sizeCol? null : '12'} sm={sizeCol? null : '6'} md={sizeCol? null : '4'} lg={sizeCol? null : '3'} >
                 {/* <NavLink href="#x"> */}
                
-            <Link to={`/products/${product.category}/${product.id}`} 
+            <Link className='center' to={`/products/${product.category}/${product.id}`} 
                  style={{ textDecoration: 'none' }}>
-            <MDBCard className="p-2 w-100 " style={{ margin:'0',maxWidth:  size ? `${size}rem` : "15rem" }} >
+            <MDBCard className="p-2 w-100 center " style={{ margin:'0',maxWidth:  size ? `${size}rem` : "15rem",minWidth:  size ? `${size}rem` : "13rem" }} >
                 <MDBCardImage  src={`${devUrl}/images/${product.img[0]}`} alt="MDBCard image cap" top hover
                     overlay="dark-slight" style={{ height: "15rem" }} />
                 <MDBCardBody style={{

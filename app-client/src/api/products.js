@@ -34,3 +34,7 @@ export function sendMail(resource,body,token){
 export function checkToken(resource,body,token){
     return axios.post(`${urllocal}/${resource}/checktoken`, body,{  headers: {token} }  )
 }
+
+export function getUserInfo(resource,body,token){
+    return axios.get(`${urllocal}/${resource}/getuserinfo`,{  headers: {token} }  )
+}

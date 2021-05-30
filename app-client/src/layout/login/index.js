@@ -21,7 +21,8 @@ const [cart, updateCart] = useContext(CartContext)
          ...cart,
          token:answer.data.token,
          email:email,
-         userName:answer.data.firstname
+         userName:answer.data.firstname,
+         key:answer.data.key
        }) 
       alert('login sucsess')
     }
@@ -29,6 +30,7 @@ const [cart, updateCart] = useContext(CartContext)
       alert('try again')
   };
 }
+// console.log(cart);
   const login = (
     <Container>
       <Row>
